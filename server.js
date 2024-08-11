@@ -7,17 +7,14 @@ const app = express();
 
 const port = process.env.PORT ? process.env.PORT : "3000";
 
+const petRouter = require('./controllers/pets.js');
+
 // Middleware
 app.use(morgan('dev'));
 
-app.use(express.urlencoded({ extended: false }));
-
-// Routes
-app.get('/', (req, res) => {
-  res.send('The server is running!');
-});
-
 app.use(express.json());
+
+app.use('/pets', petRouter);
 
 app.listen(3000, () => {
   console.log('The express app is ready!');
